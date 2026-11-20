@@ -1,0 +1,59 @@
+# CodeAlpha Internship - Task 2
+# Stock Portfolio Tracker
+
+stock_prices = {
+    "AAPL": 180,
+    "TSLA": 250,
+    "GOOGL": 150,
+    "MSFT": 400,
+    "AMZN": 200
+}
+
+print("===== STOCK PORTFOLIO TRACKER =====")
+print("\nAvailable Stocks:")
+
+for stock, price in stock_prices.items():
+    print(f"{stock} - Rs.{price}")
+
+total_investment = 0
+
+while True:
+    stock_name = input("\nEnter stock name (or 'done' to finish): ").upper()
+
+    if stock_name == "DONE":
+        break
+
+    if stock_name not in stock_prices:
+        print("Invalid stock name. Please try again.")
+        continue
+
+    try:
+        quantity = int(input("Enter quantity: "))
+
+        if quantity <= 0:
+            print("Quantity must be greater than zero.")
+            continue
+
+    except ValueError:
+        print("Please enter a valid whole number.")
+        continue
+
+    price = stock_prices[stock_name]
+    investment = price * quantity
+    total_investment += investment
+
+    print(f"Stock: {stock_name}")
+    print(f"Price per stock: Rs.{price}")
+    print(f"Quantity: {quantity}")
+    print(f"Investment: Rs.{investment}")
+
+print("\n===== PORTFOLIO SUMMARY =====")
+print(f"Total Investment: Rs.{total_investment}")
+
+# Optional file handling
+with open("portfolio.txt", "w") as file:
+    file.write("STOCK PORTFOLIO SUMMARY\n")
+    file.write(f"Total Investment: Rs.{total_investment}\n")
+
+print("Result saved to portfolio.txt")
+print("Thank you!")
